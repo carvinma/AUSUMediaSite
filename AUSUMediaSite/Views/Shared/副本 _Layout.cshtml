@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+   <meta name="viewport" content="width=device-width" />
+     <link href="~/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="~/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+   <link href="~/assets/css/style.css" rel="stylesheet" />
+      <link href="~/assets/css/main-style.css" rel="stylesheet" />
+     <script src="~/assets/plugins/jquery-1.10.2.js"></script>
+    <script src="~/assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+</head>
+<body style="background-color:#ececf0">
+     <div class="container-fluid" style="height:88px;background-color:#0088cc;">
+    <div class="row-fluid" >
+        <div class="span1"></div>
+       <div class="span10"><h2>质检员注册管理信息系统</h2></div>
+        <div class="span1"></div>
+    </div>
+        </div>
+    
+    <div class="container-fluid" style="margin-top:25px;">
+  <div class="row-fluid">
+      <div class="span1"></div>
+            <div class="span2">
+                <ul class="nav nav-list navbar-inner" style="border:1px solid #0088cc;">                                        
+                    <li class="active"><a href="~/ApplyInfo/Create"><i class="icon-pencil"></i>注册申请</a></li>                     
+                    <li><a href="~/ApplyInfo/Index"><i class="icon-book"></i>查看申请</a></li>   
+                    <li class="divider"></li>                                     
+                    <li><a href="~/ApplyInfo/Review"><i class="icon-edit"></i>待审批</a></li>     
+                    <li><a href="~/ApplyInfo/Index"><i class="icon-check"></i>已审批</a></li>                
+                    <li class="divider"></li>
+                     <li><a href="~/User/Import"><i class="icon-arrow-down"></i>导入数据</a></li>                
+                    <li><a href="~/User/ChangePassword"><i class="icon-cog"></i>修改密码</a></li>
+                    <li><a href="~/Home/Quit"><i class="icon-off"></i>安全退出</a></li>
+                </ul>
+            </div>
+            <div class="span8">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="row-fluid">
+         <div class="span1"></div>
+        <div class="span10"></div>
+         <div class="span1"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3F920213-1FCC-43F0-A843-AB0FC0C3151D}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AUSUMediaSite</RootNamespace>
+    <AssemblyName>AUSUMediaSite</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="EF\AUSUMediaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AUSUMediaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\AUSUMediaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AUSUMediaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\AUSUMediaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tbCity.cs">
+      <DependentUpon>AUSUMediaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tbEqInfo.cs">
+      <DependentUpon>AUSUMediaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tbEqMediaInfo.cs">
+      <DependentUpon>AUSUMediaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tbMediaInfo.cs">
+      <DependentUpon>AUSUMediaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tbRole.cs">
+      <DependentUpon>AUSUMediaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tbUser.cs">
+      <DependentUpon>AUSUMediaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Assets\css\common.css" />
+    <Content Include="Assets\css\default.css" />
+    <Content Include="Assets\css\main-style.css" />
+    <Content Include="Assets\css\style.css" />
+    <Content Include="Assets\font-awesome\css\font-awesome.css" />
+    <Content Include="Assets\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Assets\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\img\loginbtn.gif" />
+    <Content Include="Assets\img\loginimgbg.jpg" />
+    <Content Include="Assets\img\loginimgbg2.jpg" />
+    <Content Include="Assets\img\loginInputWrapbg.gif" />
+    <Content Include="Assets\img\logo.jpg" />
+    <Content Include="Assets\img\logo2.png" />
+    <Content Include="Assets\img\logo_login.jpg" />
+    <Content Include="Assets\img\logo_login.png" />
+    <Content Include="Assets\img\top.jpg" />
+    <Content Include="Assets\img\top1.jpg" />
+    <Content Include="Assets\img\top2.jpg" />
+    <Content Include="Assets\img\top3.jpg" />
+    <Content Include="Assets\img\user.jpg" />
+    <Content Include="Assets\plugins\additional-methods.js" />
+    <Content Include="Assets\plugins\bootstrap\bootstrap.css" />
+    <Content Include="Assets\plugins\bootstrap\bootstrap.js" />
+    <Content Include="Assets\plugins\bootstrap\bootstrap.min.js" />
+    <Content Include="Assets\plugins\dataTables\dataTables.bootstrap.css" />
+    <Content Include="Assets\plugins\dataTables\dataTables.bootstrap.js" />
+    <Content Include="Assets\plugins\dataTables\jquery.dataTables.js" />
+    <Content Include="Assets\plugins\flot\excanvas.min.js" />
+    <Content Include="Assets\plugins\flot\jquery.flot.js" />
+    <Content Include="Assets\plugins\flot\jquery.flot.pie.js" />
+    <Content Include="Assets\plugins\flot\jquery.flot.resize.js" />
+    <Content Include="Assets\plugins\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="Assets\plugins\highcharts-more.js" />
+    <Content Include="Assets\plugins\highcharts.js" />
+    <Content Include="Assets\plugins\html5.js" />
+    <Content Include="Assets\plugins\jquery-1.10.2.js" />
+    <Content Include="Assets\plugins\jquery-ui-1.10.0.js" />
+    <Content Include="Assets\plugins\jquery.validate.js" />
+    <Content Include="Assets\plugins\laydate\laydate.dev.js" />
+    <Content Include="Assets\plugins\laydate\laydate.js" />
+    <Content Include="Assets\plugins\laydate\need\laydate.css" />
+    <Content Include="Assets\plugins\laydate\skins\dahong\icon.png" />
+    <Content Include="Assets\plugins\laydate\skins\dahong\laydate.css" />
+    <Content Include="Assets\plugins\laydate\skins\danlan\icon.png" />
+    <Content Include="Assets\plugins\laydate\skins\danlan\laydate.css" />
+    <Content Include="Assets\plugins\laydate\skins\default\icon.png" />
+    <Content Include="Assets\plugins\laydate\skins\default\laydate.css" />
+    <Content Include="Assets\plugins\laydate\skins\molv\icon.png" />
+    <Content Include="Assets\plugins\laydate\skins\molv\laydate.css" />
+    <Content Include="Assets\plugins\laydate\skins\qianhuang\icon.png" />
+    <Content Include="Assets\plugins\laydate\skins\qianhuang\laydate.css" />
+    <Content Include="Assets\plugins\laydate\skins\yahui\icon.png" />
+    <Content Include="Assets\plugins\laydate\skins\yahui\laydate.css" />
+    <Content Include="Assets\plugins\laydate\skins\yalan\icon.png" />
+    <Content Include="Assets\plugins\laydate\skins\yalan\laydate.css" />
+    <Content Include="Assets\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="Assets\plugins\morris\morris-0.4.3.min.css" />
+    <Content Include="Assets\plugins\morris\morris.js" />
+    <Content Include="Assets\plugins\morris\raphael-2.1.0.min.js" />
+    <Content Include="Assets\plugins\pace\pace-theme-big-counter.css" />
+    <Content Include="Assets\plugins\pace\pace.js" />
+    <Content Include="Assets\plugins\premium.css" />
+    <Content Include="Assets\plugins\respond.min.js" />
+    <Content Include="Assets\plugins\selectivizr-development.js" />
+    <Content Include="Assets\plugins\selectivizr.js" />
+    <Content Include="Assets\plugins\smoothness\images\animated-overlay.gif" />
+    <Content Include="Assets\plugins\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Assets\plugins\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\plugins\smoothness\jquery-ui-1.10.4.custom.css" />
+    <Content Include="Assets\plugins\smoothness\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="Assets\plugins\social-buttons\social-buttons.css" />
+    <Content Include="Assets\plugins\theme.css" />
+    <Content Include="Assets\plugins\timeline\timeline.css" />
+    <Content Include="Assets\scripts\dashboard-demo.js" />
+    <Content Include="Assets\scripts\flot-demo.js" />
+    <Content Include="Assets\scripts\morris-demo.js" />
+    <Content Include="Assets\scripts\siminta.js" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\plugins\css" />
+    <Content Include="Assets\plugins\laydate\README.md" />
+    <Content Include="Content\Files\123.xls" />
+    <Content Include="Content\Files\a.xls" />
+    <Content Include="Content\Files\机电三期（轮机）.xls" />
+    <Content Include="Content\Files\第一期.xls" />
+    <Content Include="Content\Files\第七期.xls" />
+    <Content Include="Views\Home\Help.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\LogOn.cshtml" />
+    <Content Include="Views\Home\副本 Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutEmpty.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogOn.cshtml" />
+    <Content Include="Views\Shared\副本 _Layout.cshtml" />
+    <Content Include="Views\Shared\副本 _LayoutLogOn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="EF\AUSUMediaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AUSUMediaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EF\AUSUMediaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
+      <LastGenOutput>AUSUMediaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\AUSUMediaModel.edmx.diagram">
+      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EF\AUSUMediaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
+      <LastGenOutput>AUSUMediaModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54021/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,221 @@
+﻿@if (Session.Count == 0)
+{
+    Response.Redirect("~/Home/Logon");
+    return;
+}
+@using System.Web;
+@{
+
+    //string backgd = "background:url(http://" + System.Web.HttpContext.Current.Request.Url.Authority.ToString() + "/Assets/img/top.jpg" + ") no-repeat; background-color:#0073C6;border-bottom:4px solid #03538D;width:100%;height:76px";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <link href="~/assets/plugins/smoothness/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
+   
+    <link href="~/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/assets/plugins/css" rel="stylesheet" type="text/css">
+    <link href="~/assets/plugins/premium.css" rel="stylesheet" />
+    <link href="~/assets/plugins/theme.css" rel="stylesheet" />
+     <link href="~/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+
+    <link href="~/assets/plugins/laydate/need/laydate.css" rel="stylesheet" />
+  
+
+    <!-- Core Scripts - Include with every page -->
+    <script src="~/assets/plugins/jquery-1.10.2.js"></script>
+    <script src="~/assets/plugins/jquery-ui-1.10.0.js"></script>
+    <script src="~/assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/jquery.validate.js"></script>
+     <script src="~/assets/plugins/laydate/laydate.js"></script>
+    <!--[if lte IE 9]>
+<script src="~/assets/plugins/respond.min.js"></script>
+<script src="~/assets/plugins/html5.js"></script>
+<script src="~/assets/plugins/selectivizr.js"></script>
+<![endif]-->
+
+    <style>
+        table th{word-break: keep-all;white-space:nowrap;text-align:center;}
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-default topnav   " role="navigation" >
+        <div class="navbar-header">
+           @* <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand"><span class="fa fa-paper-plane"></span></span>*@
+
+            
+        </div>
+        <div style="float:right;position: relative; top: 23px;right:5px;">
+            <span class="glyphicon glyphicon-user padding-right-small" style=" color:white;">@Session["RealName"]</span><span>|</span><a style="color:white;" href="~/User/ChangePassword">修改密码</a><span>|</span><a style="color:white;"  href="~/Home/Quit">退出</a><span>|</span>
+            @if(Session["RoleID"].ToString()=="1")
+            {
+            <a style="color:white;"  href="~/help.doc">帮助</a>
+            }
+            else
+            {
+                 <a style="color:white;"  href="~/help2.doc">帮助</a>
+            }
+            
+        </div>
+
+        @*<div class="navbar-collapse collapse" style="height: 1px;">
+            <ul id="main-menu" class="nav navbar-nav navbar-right" style="margin-top:10px;" >
+                <li class="dropdown hidden-xs">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font:white; color:#fff">
+                        <span class="glyphicon glyphicon-user padding-right-small" style="position: relative; top: 3px; "></span>@Session["RealName"]
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="~/User/ChangePassword">修改密码</a></li>
+                        <li class="divider"></li>
+
+                        <li><a tabindex="-1" href="~/Home/Quit">退出</a></li>
+                    </ul>
+                    <span class="glyphicon glyphicon-user padding-right-small" style="position: relative; top: 3px; ">@Session["RealName"]</span><span>|</span><a href="~/User/ChangePassword">修改密码</a><span>|</span><a tabindex="-1" href="~/Home/Quit">退出</a>
+                </li>
+
+            </ul>
+        </div>*@
+    </div>
+    <div class="sidebar-nav">
+        <ul>
+            <li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-fw fa-dashboard"></i>导航栏<i class="fa fa-collapse"></i></a></li>
+            <li>
+                <ul class="dashboard-menu nav nav-list collapse in">
+                    @if (Session["RoleID"].ToString() == "1")
+                    {
+                        if (@ViewBag.Title == "填写申请表")
+                        {          
+                        <li class="active"><a href="~/applyinfo/create"><span class="fa fa-caret-right"></span>填写申请表</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/applyinfo/create"><span class="fa fa-caret-right"></span>填写申请表</a></li>
+                        }
+                        if (@ViewBag.Title == "我的申请")
+                        { 
+                        <li class="active"><a href="~/applyinfo/queryself"><span class="fa fa-caret-right"></span>我的申请</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/applyinfo/queryself"><span class="fa fa-caret-right"></span>我的申请</a></li>
+                        }
+                    }
+                    @if (Session["RoleID"].ToString() == "2")
+                    {
+                        if (@ViewBag.Title == "待确认申请表")
+                        {          
+                        <li class="active"><a href="~/applyinfo/noreview"><span class="fa fa-caret-right"></span>待确认申请表</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/applyinfo/noreview"><span class="fa fa-caret-right"></span>待确认申请表</a></li>
+                        }
+                        if (@ViewBag.Title == "已确认申请表")
+                        {          
+                        <li class="active"><a href="~/applyinfo/yesreview"><span class="fa fa-caret-right"></span>已确认申请表</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/applyinfo/yesreview"><span class="fa fa-caret-right"></span>已确认申请表</a></li>
+                        }
+                        if (@ViewBag.Title == "查询申请表")
+                        {          
+                        <li class="active"><a href="~/applyinfo/query"><span class="fa fa-caret-right"></span>查询申请表</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/applyinfo/querycompany"><span class="fa fa-caret-right"></span>查询申请表</a></li>
+                        }
+                    }
+                    @if (Session["RoleID"].ToString() == "3")
+                    {
+                        if (@ViewBag.Title == "系统数据总览")
+                        {          
+                        <li class="active"><a href="~/home/index"><span class="fa fa-caret-right"></span>系统数据总览</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/home/index"><span class="fa fa-caret-right"></span>系统数据总览</a></li>
+                        }
+                        
+                        <li class="divider"></li>
+                        if (@ViewBag.Title == "待审核申请表")
+                        {          
+                        <li class="active"><a href="~/applyinfo/nocheck"><span class="fa fa-caret-right"></span>待审核申请表</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/applyinfo/nocheck"><span class="fa fa-caret-right"></span>待审核申请表</a></li>
+                        }
+                        if (@ViewBag.Title == "已审核申请表")
+                        {          
+                        <li class="active"><a href="~/applyinfo/yescheck"><span class="fa fa-caret-right"></span>已审核申请表</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/applyinfo/yescheck"><span class="fa fa-caret-right"></span>已审核申请表</a></li>
+                        }
+                        if (@ViewBag.Title == "查询申请表")
+                        {          
+                        <li class="active"><a href="~/applyinfo/query"><span class="fa fa-caret-right"></span>查询申请表</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/applyinfo/query"><span class="fa fa-caret-right"></span>查询申请表</a></li>
+                        }
+                        <li class="divider"></li>
+                        if (@ViewBag.Title == "导入用户列表")
+                        {          
+                        <li class="active"><a href="~/ImportData/create"><span class="fa fa-caret-right"></span>导入用户列表</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/ImportData/create"><span class="fa fa-caret-right"></span>导入用户列表</a></li>
+                        }
+                        
+                        if (@ViewBag.Title == "导入单位管理员")
+                        {          
+                        <li class="active"><a href="~/ImportData/createmanager"><span class="fa fa-caret-right"></span>导入单位管理员</a></li>
+                        }
+                        else
+                        {
+                        <li><a href="~/ImportData/createmanager"><span class="fa fa-caret-right"></span>导入单位管理员</a></li>
+                        }
+                     
+                    }
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        @RenderBody()
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

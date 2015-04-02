@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbmediaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="dbmediaModelStoreContainer">
+          <EntitySet Name="tbCity" EntityType="dbmediaModel.Store.tbCity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbEqInfo" EntityType="dbmediaModel.Store.tbEqInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbEqMediaInfo" EntityType="dbmediaModel.Store.tbEqMediaInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbMediaInfo" EntityType="dbmediaModel.Store.tbMediaInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbRole" EntityType="dbmediaModel.Store.tbRole" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbUser" EntityType="dbmediaModel.Store.tbUser" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_tbEqInfo_tbCity" Association="dbmediaModel.Store.FK_tbEqInfo_tbCity">
+            <End Role="tbCity" EntitySet="tbCity" />
+            <End Role="tbEqInfo" EntitySet="tbEqInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEqMediaInfo_tbEqInfo" Association="dbmediaModel.Store.FK_tbEqMediaInfo_tbEqInfo">
+            <End Role="tbEqInfo" EntitySet="tbEqInfo" />
+            <End Role="tbEqMediaInfo" EntitySet="tbEqMediaInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEqMediaInfo_tbMediaInfo" Association="dbmediaModel.Store.FK_tbEqMediaInfo_tbMediaInfo">
+            <End Role="tbMediaInfo" EntitySet="tbMediaInfo" />
+            <End Role="tbEqMediaInfo" EntitySet="tbEqMediaInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbUser_tbRole" Association="dbmediaModel.Store.FK_tbUser_tbRole">
+            <End Role="tbRole" EntitySet="tbRole" />
+            <End Role="tbUser" EntitySet="tbUser" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbCity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbEqInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="sn" Type="nvarchar" MaxLength="50" />
+          <Property Name="CityID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbEqMediaInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MediaID" Type="int" />
+          <Property Name="EqID" Type="int" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbMediaInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MediaName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MediaUrl" Type="nvarchar" MaxLength="500" />
+          <Property Name="SubTitle" Type="nvarchar" MaxLength="2000" />
+          <Property Name="MediaSize" Type="bigint" />
+          <Property Name="MediaType" Type="nvarchar" MaxLength="10" />
+          <Property Name="UpdateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_tbEqInfo_tbCity">
+          <End Role="tbCity" Type="dbmediaModel.Store.tbCity" Multiplicity="0..1" />
+          <End Role="tbEqInfo" Type="dbmediaModel.Store.tbEqInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqInfo">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEqMediaInfo_tbEqInfo">
+          <End Role="tbEqInfo" Type="dbmediaModel.Store.tbEqInfo" Multiplicity="0..1" />
+          <End Role="tbEqMediaInfo" Type="dbmediaModel.Store.tbEqMediaInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEqInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqMediaInfo">
+              <PropertyRef Name="EqID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEqMediaInfo_tbMediaInfo">
+          <End Role="tbMediaInfo" Type="dbmediaModel.Store.tbMediaInfo" Multiplicity="0..1" />
+          <End Role="tbEqMediaInfo" Type="dbmediaModel.Store.tbEqMediaInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMediaInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqMediaInfo">
+              <PropertyRef Name="MediaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbUser_tbRole">
+          <End Role="tbRole" Type="dbmediaModel.Store.tbRole" Multiplicity="0..1" />
+          <End Role="tbUser" Type="dbmediaModel.Store.tbUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRole">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbUser">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbmediaModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="dbmediaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbCity" EntityType="dbmediaModel.tbCity" />
+          <EntitySet Name="tbEqInfo" EntityType="dbmediaModel.tbEqInfo" />
+          <EntitySet Name="tbEqMediaInfo" EntityType="dbmediaModel.tbEqMediaInfo" />
+          <EntitySet Name="tbMediaInfo" EntityType="dbmediaModel.tbMediaInfo" />
+          <EntitySet Name="tbRole" EntityType="dbmediaModel.tbRole" />
+          <EntitySet Name="tbUser" EntityType="dbmediaModel.tbUser" />
+          <AssociationSet Name="FK_tbEqInfo_tbCity" Association="dbmediaModel.FK_tbEqInfo_tbCity">
+            <End Role="tbCity" EntitySet="tbCity" />
+            <End Role="tbEqInfo" EntitySet="tbEqInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEqMediaInfo_tbEqInfo" Association="dbmediaModel.FK_tbEqMediaInfo_tbEqInfo">
+            <End Role="tbEqInfo" EntitySet="tbEqInfo" />
+            <End Role="tbEqMediaInfo" EntitySet="tbEqMediaInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEqMediaInfo_tbMediaInfo" Association="dbmediaModel.FK_tbEqMediaInfo_tbMediaInfo">
+            <End Role="tbMediaInfo" EntitySet="tbMediaInfo" />
+            <End Role="tbEqMediaInfo" EntitySet="tbEqMediaInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbUser_tbRole" Association="dbmediaModel.FK_tbUser_tbRole">
+            <End Role="tbRole" EntitySet="tbRole" />
+            <End Role="tbUser" EntitySet="tbUser" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbCity">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tbEqInfo" Relationship="dbmediaModel.FK_tbEqInfo_tbCity" FromRole="tbCity" ToRole="tbEqInfo" />
+        </EntityType>
+        <EntityType Name="tbEqInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sn" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CityID" Type="Int32" />
+          <NavigationProperty Name="tbCity" Relationship="dbmediaModel.FK_tbEqInfo_tbCity" FromRole="tbEqInfo" ToRole="tbCity" />
+          <NavigationProperty Name="tbEqMediaInfo" Relationship="dbmediaModel.FK_tbEqMediaInfo_tbEqInfo" FromRole="tbEqInfo" ToRole="tbEqMediaInfo" />
+        </EntityType>
+        <EntityType Name="tbEqMediaInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MediaID" Type="Int32" />
+          <Property Name="EqID" Type="Int32" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbEqInfo" Relationship="dbmediaModel.FK_tbEqMediaInfo_tbEqInfo" FromRole="tbEqMediaInfo" ToRole="tbEqInfo" />
+          <NavigationProperty Name="tbMediaInfo" Relationship="dbmediaModel.FK_tbEqMediaInfo_tbMediaInfo" FromRole="tbEqMediaInfo" ToRole="tbMediaInfo" />
+        </EntityType>
+        <EntityType Name="tbMediaInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MediaName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MediaUrl" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="SubTitle" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="MediaSize" Type="Int64" />
+          <Property Name="MediaType" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbEqMediaInfo" Relationship="dbmediaModel.FK_tbEqMediaInfo_tbMediaInfo" FromRole="tbMediaInfo" ToRole="tbEqMediaInfo" />
+        </EntityType>
+        <EntityType Name="tbRole">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tbUser" Relationship="dbmediaModel.FK_tbUser_tbRole" FromRole="tbRole" ToRole="tbUser" />
+        </EntityType>
+        <EntityType Name="tbUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="RealName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tbRole" Relationship="dbmediaModel.FK_tbUser_tbRole" FromRole="tbUser" ToRole="tbRole" />
+        </EntityType>
+        <Association Name="FK_tbEqInfo_tbCity">
+          <End Role="tbCity" Type="dbmediaModel.tbCity" Multiplicity="0..1" />
+          <End Role="tbEqInfo" Type="dbmediaModel.tbEqInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCity">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqInfo">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEqMediaInfo_tbEqInfo">
+          <End Role="tbEqInfo" Type="dbmediaModel.tbEqInfo" Multiplicity="0..1" />
+          <End Role="tbEqMediaInfo" Type="dbmediaModel.tbEqMediaInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEqInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqMediaInfo">
+              <PropertyRef Name="EqID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEqMediaInfo_tbMediaInfo">
+          <End Role="tbMediaInfo" Type="dbmediaModel.tbMediaInfo" Multiplicity="0..1" />
+          <End Role="tbEqMediaInfo" Type="dbmediaModel.tbEqMediaInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbMediaInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqMediaInfo">
+              <PropertyRef Name="MediaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbUser_tbRole">
+          <End Role="tbRole" Type="dbmediaModel.tbRole" Multiplicity="0..1" />
+          <End Role="tbUser" Type="dbmediaModel.tbUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbRole">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbUser">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbmediaModelStoreContainer" CdmEntityContainer="dbmediaEntities">
+          <EntitySetMapping Name="tbCity">
+            <EntityTypeMapping TypeName="dbmediaModel.tbCity">
+              <MappingFragment StoreEntitySet="tbCity">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEqInfo">
+            <EntityTypeMapping TypeName="dbmediaModel.tbEqInfo">
+              <MappingFragment StoreEntitySet="tbEqInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="sn" ColumnName="sn" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEqMediaInfo">
+            <EntityTypeMapping TypeName="dbmediaModel.tbEqMediaInfo">
+              <MappingFragment StoreEntitySet="tbEqMediaInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+                <ScalarProperty Name="EqID" ColumnName="EqID" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbMediaInfo">
+            <EntityTypeMapping TypeName="dbmediaModel.tbMediaInfo">
+              <MappingFragment StoreEntitySet="tbMediaInfo">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MediaName" ColumnName="MediaName" />
+                <ScalarProperty Name="MediaUrl" ColumnName="MediaUrl" />
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="MediaSize" ColumnName="MediaSize" />
+                <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbRole">
+            <EntityTypeMapping TypeName="dbmediaModel.tbRole">
+              <MappingFragment StoreEntitySet="tbRole">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbUser">
+            <EntityTypeMapping TypeName="dbmediaModel.tbUser">
+              <MappingFragment StoreEntitySet="tbUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

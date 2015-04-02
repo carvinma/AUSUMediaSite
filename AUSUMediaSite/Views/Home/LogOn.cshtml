@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutLogOn.cshtml";
+}
+@model AUSUMediaSite.EF.tbUser
+@{
+    ViewBag.Title = "会员登录";
+    HttpBrowserCapabilitiesBase bc = Request.Browser;
+    bool warning = false; 
+}
+
+<div style="width: 100%; height: 50%; left: 0; top: 0; z-index: -1;"></div>
+<div style="width: 442px; height: 440px; margin: 0 auto; margin-top: -260px;">
+    <div class="loginLogo"></div>
+    <div class="welcome" style="font-size:30px">质量检验员注册管理系统</div>
+    <div class="loginBar" id="loginBar">
+        <form id="frm" name="form1" method="post" action="~/home/logon">
+            <input type="hidden" name="gotopage" />
+            <input type="hidden" name="dopost" />
+            <input name='adminstyle' type='hidden' />
+            
+            <div class="">
+                <div class="fieldWrap">
+                    <div class="lable">用户名：</div>
+                    <div class="inputWrap">
+                        <input type="text" class="inputText" id="UserName" name="UserName" required>
+                    </div>
+                </div>
+                <div class="fieldWrap">
+                    <div class="lable">密码：</div>
+                    <div class="inputWrap">
+                        <input name="Password" type="password" class="inputText" id="Password" required>
+                    </div>
+                </div>
+
+
+                      
+                <div class="fieldWrap" id="loginBtnWrap" style="width:300px;">
+
+                    <input name="提交" type="submit" value="登陆" class="inline-block" id="loginBtn" style="border: none;">
+@if (ViewBag.error != null)
+                    {
+                    <label class="error" style="margin-bottom:15px;margin-left:auto;border: none;">@ViewBag.error</label>
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="copyright">
+    <div class="center">Copy right &copy; 2014 中国船舶工业综合技术经济研究院.</div>
+</div>
+
+@if (bc.MajorVersion < 9 && bc.Browser == "IE")
+{
+    <div class="alert alert-danger" role="alert" style="text-align:center;">
+        <h2>您使用的浏览器版本太低，请您升级浏览器IE9以上或下载其他浏览器</h2>
+  <div><a href="http://www.maxthon.cn/"><h4>下载：傲游浏览器</h4></a></div>
+    <div><a href="http://ie.sogou.com/"><h4>下载：搜狗浏览器</h4></a></div>
+        <div><a href="http://www.microsoft.com/zh-cn/download/internet-explorer.aspx"><h4>下载：IE浏览器&nbsp;&nbsp;&nbsp;&nbsp;</h4></a></div>
+</div>
+}
+
+

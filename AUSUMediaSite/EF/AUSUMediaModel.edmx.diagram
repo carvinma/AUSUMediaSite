@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2afbf898131345798c813a7bbaaa7b08" Name="关系图1">
+        <EntityTypeShape EntityType="dbmediaModel.tbCity" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbEqInfo" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbEqMediaInfo" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbMediaInfo" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbRole" Width="1.5" PointX="5.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbUser" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="dbmediaModel.FK_tbEqInfo_tbCity" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmediaModel.FK_tbEqMediaInfo_tbEqInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmediaModel.FK_tbEqMediaInfo_tbMediaInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmediaModel.FK_tbUser_tbRole" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
