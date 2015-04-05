@@ -21,13 +21,13 @@ namespace AUSUMediaSite.Controllers
 	{
         dbmediaEntities db = new dbmediaEntities();
 
-        public JsonResult GetServerData(string sn, string action)
+        public JsonResult GetServerData(string sn, string req)
         {
-            if (action == "1")
+            if (req == "1")
             {
                 return RegtoServer(sn);
             }
-            else if (action == "2")
+            else if (req == "2")
             {
                 return GetEqMediaList(sn);
             }
