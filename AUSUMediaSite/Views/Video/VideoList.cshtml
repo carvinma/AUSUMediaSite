@@ -3,14 +3,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     int i = 1;
 }
-@using PagedList.Mvc; 
+@using PagedList;
+@using PagedList.Mvc;
 @model PagedList.IPagedList<AUSUMediaSite.EF.tbMediaInfo>
 
 <h2>视频列表</h2>
 
 <table class="table table-bordered">
     <tr>
-         <th>操作</th>
         <th>
             序号
         </th>
@@ -35,9 +35,6 @@
 
  @foreach (var item in Model) {
     <tr>
-         <td>
-         
-           </td>
         <td>
             @i
         </td>
@@ -69,4 +66,23 @@
 }
 
 </table>
-@Html.PagedListPager( Model, page => Url.Action("Query", new {StartTime=ViewBag.CurrentStartTime,EndTime=ViewBag.CurrentEndTime, State=ViewBag.CurrentState, CompanyID=ViewBag.CurrentCompanyID,QtProID=ViewBag.CurrentQtProID,ApplyGradeID=ViewBag.CurrentGradeID,SubProID=ViewBag.CurrentSubProID,page}) )
+
+@Html.PagedListPager( Model, page => Url.Action("VideoList", new {page}) )
+
+<div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Delete Confirmation</h3>
+        </div>
+        <div class="modal-body">
+            <p class="error-text"><i class="fa fa-warning modal-icon"></i>Are you sure you want to delete the user?<br>This cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+        </div>
+      </div>
+    </div>
+</div>

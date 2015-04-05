@@ -457,6 +457,9 @@
   <ItemGroup>
     <Content Include="Views\Video\VideoCategory.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Video\VideoEdit.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
