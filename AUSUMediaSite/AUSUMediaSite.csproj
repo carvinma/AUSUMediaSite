@@ -120,6 +120,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AndroidController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="EF\AUSUMediaModel.Context.cs">
@@ -361,17 +362,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Files\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Files\123.xls" />
-    <Content Include="Content\Files\a.xls" />
-    <Content Include="Content\Files\机电三期（轮机）.xls" />
-    <Content Include="Content\Files\第一期.xls" />
-    <Content Include="Content\Files\第七期.xls" />
     <Content Include="Views\Home\Help.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\LogOn.cshtml" />
