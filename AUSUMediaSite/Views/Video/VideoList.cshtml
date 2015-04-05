@@ -1,9 +1,72 @@
 ﻿@{
     ViewBag.Title = "视频列表";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
 }
 @using PagedList.Mvc; 
 @model PagedList.IPagedList<AUSUMediaSite.EF.tbMediaInfo>
 
 <h2>视频列表</h2>
+
+<table class="table table-bordered">
+    <tr>
+         <th>操作</th>
+        <th>
+            序号
+        </th>
+        <th>
+            名称
+        </th>
+         <th>
+            链接地址
+        </th>
+        <th>
+            标题
+        </th>
+         <th style="width:90px;">
+            大小
+        </th>
+        <th>
+           类别
+        </th>
+        <th>更新时间</th>
+        <th></th>
+    </tr>
+
+ @foreach (var item in Model) {
+    <tr>
+         <td>
+         
+           </td>
+        <td>
+            @i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MediaName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MediaUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MediaSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MediaType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateTime)
+        </td>
+       
+        <td>
+          <a href="user.html"><i class="fa fa-pencil"></i></a>
+          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+      </td>
+    </tr>
+    i++;
+}
+
+</table>
 @Html.PagedListPager( Model, page => Url.Action("Query", new {StartTime=ViewBag.CurrentStartTime,EndTime=ViewBag.CurrentEndTime, State=ViewBag.CurrentState, CompanyID=ViewBag.CurrentCompanyID,QtProID=ViewBag.CurrentQtProID,ApplyGradeID=ViewBag.CurrentGradeID,SubProID=ViewBag.CurrentSubProID,page}) )
