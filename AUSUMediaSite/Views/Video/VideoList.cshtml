@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "视频列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using PagedList.Mvc; 
+@model PagedList.IPagedList<AUSUMediaSite.EF.tbMediaInfo>
+
+<h2>视频列表</h2>
+@Html.PagedListPager( Model, page => Url.Action("Query", new {StartTime=ViewBag.CurrentStartTime,EndTime=ViewBag.CurrentEndTime, State=ViewBag.CurrentState, CompanyID=ViewBag.CurrentCompanyID,QtProID=ViewBag.CurrentQtProID,ApplyGradeID=ViewBag.CurrentGradeID,SubProID=ViewBag.CurrentSubProID,page}) )

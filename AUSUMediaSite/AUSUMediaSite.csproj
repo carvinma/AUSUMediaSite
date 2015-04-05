@@ -43,6 +43,12 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList">
+      <HintPath>C:\Users\Administrator\Desktop\Qisr\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>C:\Users\Administrator\Desktop\Qisr\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -115,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="EF\AUSUMediaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -446,6 +453,12 @@
     <Content Include="Assets\lib\fullcalendar-1.6.4\demos\json-events.php" />
     <Content Include="Assets\lib\jQuery-Knob\knob.jquery.json" />
     <Content Include="Assets\lib\jQuery-Knob\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Video\VideoList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Video\VideoCategory.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
