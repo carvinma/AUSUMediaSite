@@ -26,6 +26,8 @@ namespace AUSUMediaSite.EF
         }
     
         public DbSet<tbCity> tbCity { get; set; }
+        public DbSet<tbCommon> tbCommon { get; set; }
+        public DbSet<tbEqConnectRecord> tbEqConnectRecord { get; set; }
         public DbSet<tbEqInfo> tbEqInfo { get; set; }
         public DbSet<tbEqMediaInfo> tbEqMediaInfo { get; set; }
         public DbSet<tbMediaInfo> tbMediaInfo { get; set; }

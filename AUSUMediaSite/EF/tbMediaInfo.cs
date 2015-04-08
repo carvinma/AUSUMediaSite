@@ -26,7 +26,9 @@ namespace AUSUMediaSite.EF
         public Nullable<long> MediaSize { get; set; }
         public string MediaType { get; set; }
         public Nullable<System.DateTime> UpdateTime { get; set; }
+        public Nullable<int> MediaCategoryID { get; set; }
     
+        public virtual tbCommon tbCommon { get; set; }
         public virtual ICollection<tbEqMediaInfo> tbEqMediaInfo { get; set; }
     }
 }

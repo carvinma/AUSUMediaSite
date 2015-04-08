@@ -121,8 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AndroidController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\EqInfoController.cs" />
+    <Compile Include="Controllers\EqMediaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\MediaController.cs" />
     <Compile Include="EF\AUSUMediaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -139,6 +143,12 @@
       <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="EF\tbCity.cs">
+      <DependentUpon>AUSUMediaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tbCommon.cs">
+      <DependentUpon>AUSUMediaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\tbEqConnectRecord.cs">
       <DependentUpon>AUSUMediaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\tbEqInfo.cs">
@@ -379,27 +389,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="EF\AUSUMediaModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AUSUMediaModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="EF\AUSUMediaModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
-      <LastGenOutput>AUSUMediaModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EF\AUSUMediaModel.edmx.diagram">
-      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="EF\AUSUMediaModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
-      <LastGenOutput>AUSUMediaModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Assets\lib\.DS_Store" />
     <Content Include="Assets\lib\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="Assets\lib\bootstrap\css\bootstrap.css.map" />
@@ -452,13 +441,76 @@
     <Content Include="Assets\lib\jQuery-Knob\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Video\VideoList.cshtml" />
+    <Content Include="Views\Media\MediaList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Video\VideoCategory.cshtml" />
+    <Content Include="Views\Media\MediaEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Video\VideoEdit.cshtml" />
+    <Content Include="Views\EqInfo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EqInfo\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="EF\AUSUMediaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AUSUMediaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EF\AUSUMediaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
+      <LastGenOutput>AUSUMediaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\AUSUMediaModel.edmx.diagram">
+      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EF\AUSUMediaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AUSUMediaModel.edmx</DependentUpon>
+      <LastGenOutput>AUSUMediaModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Common\MediaCategoryList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Common\MediaCategoryCreate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Common\MediaCategoryEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Common\EqTypeCreate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Common\EqTypeEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Common\EqTypeList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Media\MediaCreate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EqMedia\EqOnlineMediaList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EqMedia\AssignMediaList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EqMedia\SelectMediaList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\List.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -75,15 +75,37 @@ namespace AUSUMediaSite.Controllers
                     db.tbEqInfo.Add(eq);
                     db.SaveChanges();
                 }
-                arr.Add(new { result = true });
+                arr.Add(new { result = "1" });
                 return Json(new JsonResult { Data = arr }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                arr.Add(new {result=false });
+                arr.Add(new {result="0" });
                 return Json(new JsonResult { Data = arr }, JsonRequestBehavior.AllowGet);
             }
             
+        }
+
+        public ActionResult DownloadMedia(string fileName)
+        {
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                var path = Server.MapPath("~/content/files/") + fileName;
+                FileStream fs = new FileStream(path, FileMode.Open);
+                byte[] bytes = new byte[(int)fs.Length];
+                fs.Read(bytes, 0, bytes.Length);
+                fs.Close();
+                Response.Charset = "UTF-8";
+                Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+                Response.ContentType = "application/octet-stream";
+                //解决文件名乱码问题            
+                Response.AddHeader("Content-Disposition", "attachment;filename=" + Server.UrlEncode(fileName));
+                Response.BinaryWrite(bytes);
+                Response.Flush();
+                Response.End();
+            }
+            return new EmptyResult();
+
         }
 	}
 

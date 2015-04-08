@@ -1,4 +1,9 @@
-﻿@using System.Web;
+﻿@if (Session.Count == 0)
+{
+    Response.Redirect("~/Home/Logon");
+    return;
+}
+@using System.Web;
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,24 +87,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="" href="index.html"><span class="navbar-brand"><span class="fa fa-paper-plane"></span>AUSU</span></a>
+            <a class="" href="index.html"><span class="navbar-brand">AUSU</span></a>
         </div>
 
         <div class="navbar-collapse collapse" style="height: 1px;">
             <ul id="main-menu" class="nav navbar-nav navbar-right">
                 <li class="dropdown hidden-xs">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-user padding-right-small" style="position: relative; top: 3px;"></span>Jack Smith
+                        <span class="glyphicon glyphicon-user padding-right-small" style="position: relative; top: 3px;"></span><span>@Session["RealName"]</span>
                    
                         <i class="fa fa-caret-down"></i>
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li><a href="./">个人信息</a></li>
+                        <li><a href="/User/Edit">个人信息</a></li>
                         <li class="divider"></li>
-                        <li class="dropdown-header">Admin Panel</li>
-                        <li class="divider"></li>
-                        <li><a tabindex="-1" href="sign-in.html">退出</a></li>
+                        <li><a tabindex="-1" href="/Home/Quit">退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -113,31 +116,33 @@
             <li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-fw fa-dashboard"></i>视频管理<i class="fa fa-collapse"></i></a></li>
             <li>
                 <ul class="dashboard-menu nav nav-list collapse in">
-                    <li><a href="~/Video/VideoCategory"><span class="fa fa-caret-right"></span>视频分类</a></li>
-                    <li><a href="~/Video/VideoList"><span class="fa fa-caret-right"></span>视频列表</a></li>
+                    <li><a href="/Media/MediaList"><span class="fa fa-caret-right"></span>视频列表</a></li>
+                    <li><a href="/Common/MediaCategoryList"><span class="fa fa-caret-right"></span>视频类别列表</a></li>
+                    
                 </ul>
             </li>
 
-            <li data-popover="true" data-content="Items in this group require a <strong><a href='http://portnine.com/bootstrap-themes/aircraft' target='blank'>premium license</a><strong>." rel="popover" data-placement="right"><a href="#" data-target=".premium-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-fighter-jet"></i>设备管理<i class="fa fa-collapse"></i></a></li>
+            <li><a href="#" data-target=".premium-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-fighter-jet"></i>设备管理<i class="fa fa-collapse"></i></a></li>
             <li>
-                <ul class="premium-menu nav nav-list collapse">
-
-                    <li><a href="premium-profile.html"><span class="fa fa-caret-right"></span>设备信息</a></li>
-                    <li><a href="premium-profile.html"><span class="fa fa-caret-right"></span>设备在播视频</a></li>
-                    <li><a href="premium-profile.html"><span class="fa fa-caret-right"></span>设备视频管理</a></li>
+                <ul class="premium-menu nav nav-list collapse in">
+                   <li><a href="~/EqInfo/Index"><span class="fa fa-caret-right"></span>设备信息</a></li>
+                    <li><a href="~/EqMedia/EqOnlineMediaList"><span class="fa fa-caret-right"></span>设备在播视频</a></li>
+                    <li><a href="~/EqMedia/AssignMediaList"><span class="fa fa-caret-right"></span>设备视频管理</a></li>
+                     <li><a href="~/Common/EqTypeList"><span class="fa fa-caret-right"></span>设备类别列表</a></li>
+                    
                 </ul>
             </li>
 
 
-            <li><a href="#" data-target=".legal-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-legal"></i>系统管理<i class="fa fa-collapse"></i></a></li>
+            <li><a href="#" data-target=".legal-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-fw fa-legal"></i>用户管理<i class="fa fa-collapse"></i></a></li>
             <li>
                 <ul class="legal-menu nav nav-list collapse">
-                    <li><a href="privacy-policy.html"><span class="fa fa-caret-right"></span>用户列表</a></li>
-                    <li><a href="terms-and-conditions.html"><span class="fa fa-caret-right"></span>用户分类</a></li>
+                    <li><a href="/User/List"><span class="fa fa-caret-right"></span>用户列表</a></li>
+                   @* <li><a href="terms-and-conditions.html"><span class="fa fa-caret-right"></span>用户分类</a></li>*@
                 </ul>
             </li>
 
-            <li><a href="help.html" class="nav-header"><i class="fa fa-fw fa-question-circle"></i>帮助</a></li>
+            <li><a href="/Home/Help" class="nav-header"><i class="fa fa-fw fa-question-circle"></i>帮助</a></li>
 
         </ul>
     </div>

@@ -73,15 +73,8 @@ namespace AUSUMediaSite.Controllers
                     int roleid=int.Parse(result.ToList()[0].RoleID.ToString());
                     Session["RoleID"] = result.ToList()[0].RoleID;
                    
-
-                    if (roleid == 1)
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else if (roleid == 2)
-                    {
-                        return RedirectToAction("NoReview", "ApplyInfo");
-                    }
+                    return RedirectToAction("Index", "Home");
+                   
                     
                 }
             }

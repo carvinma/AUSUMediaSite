@@ -16,14 +16,19 @@ namespace AUSUMediaSite.EF
     {
         public tbEqInfo()
         {
+            this.tbEqConnectRecord = new HashSet<tbEqConnectRecord>();
             this.tbEqMediaInfo = new HashSet<tbEqMediaInfo>();
         }
     
         public int ID { get; set; }
         public string sn { get; set; }
         public Nullable<int> CityID { get; set; }
+        public string IPAddress { get; set; }
+        public Nullable<int> EqTypeID { get; set; }
     
         public virtual tbCity tbCity { get; set; }
+        public virtual tbCommon tbCommon { get; set; }
+        public virtual ICollection<tbEqConnectRecord> tbEqConnectRecord { get; set; }
         public virtual ICollection<tbEqMediaInfo> tbEqMediaInfo { get; set; }
     }
 }

@@ -1,45 +1,59 @@
-﻿@model AUSUMediaSite.EF.tbEqInfo
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model AUSUMediaSite.EF.tbEqInfo
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "编辑";
 }
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            url: '/common/GetCommons?tag=2',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                $.each(data.Data, function (key, d) {
+                    var s = '<option value="' + d.Value + '">' + d.Display + '</option>'
+                    $('#EqTypeID').append(s);
 
-<h2>Edit</h2>
+                });
+                var curvalue = $("#currentEqTypeID").val();
+                $("#EqTypeID").val(curvalue);
+            }
+        });
+    });
+</script>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">编辑设备信息</div>
 
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+            <form id="frm" method="post" class="form-horizontal" action="~/eqinfo/edit">
+                
+                <div class="form-group">
+                    <label class="col-lg-4 control-label"><span class="input_required"></span>设备SN：</label>
+                    <div class="col-lg-4">
+                        <input type="text" readonly class="form-control" name="sn" id="sn" value="@Model.sn" />
+                    </div>
+                </div>
 
-    <fieldset>
-        <legend>tbEqInfo</legend>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label"><span class="input_required"></span>设备类别：</label>
+                    <div class="col-lg-1">
+                        <select id="EqTypeID" name="EqTypeID" class="form-control">
+                        </select>
+                    </div>                  
+                </div>
 
-        @Html.HiddenFor(model => model.ID)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.sn)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.sn)
-            @Html.ValidationMessageFor(model => model.sn)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CityID, "tbCity")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("CityID", String.Empty)
-            @Html.ValidationMessageFor(model => model.CityID)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+                <input type="hidden" id="id" name="id" value="@Model.ID" />
+                <input type="hidden" id="currentEqTypeID" value="@Model.EqTypeID"/>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label"></label>
+                    <div class="col-lg-4">
+                        <button type="submit" id="submit1" class="btn btn-primary">保存</button>
+                        <a id="btnBack" href="~/EqInfo/Index" class="btn btn-md btn-warning">取消</a>
+                    </div>
+                </div>
+            </form>
+    </div>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

@@ -1,39 +1,54 @@
-﻿@model IEnumerable<AUSUMediaSite.EF.tbEqInfo>
-
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "设备列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int seqNumber = ViewBag.SeqNumber;
 }
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<AUSUMediaSite.EF.tbEqInfo>
 
-<h2>Index</h2>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">设备列表</div>
+        <table class="table table-bordered">
+            <tr>
+                <th>#
+                </th>
+                <th>设备SN
+                </th>
+                <th>IP地址
+                </th>
+                <th>分类
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.sn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbCity.CityName)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @seqNumber
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IPAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbCommon.Name)
+                    </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.sn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbCity.CityName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+                    <td>
+                        <a href="/EqInfo/Edit/@item.ID"><i class="fa fa-pencil"></i></a>
+                    </td>
+                </tr>
+                seqNumber++;
+            }
 
-</table>
+        </table>
+        
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+

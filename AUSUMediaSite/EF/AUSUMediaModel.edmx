@@ -7,13 +7,23 @@
       <Schema Namespace="dbmediaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="dbmediaModelStoreContainer">
           <EntitySet Name="tbCity" EntityType="dbmediaModel.Store.tbCity" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbCommon" EntityType="dbmediaModel.Store.tbCommon" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="tbEqConnectRecord" EntityType="dbmediaModel.Store.tbEqConnectRecord" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbEqInfo" EntityType="dbmediaModel.Store.tbEqInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbEqMediaInfo" EntityType="dbmediaModel.Store.tbEqMediaInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbMediaInfo" EntityType="dbmediaModel.Store.tbMediaInfo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbRole" EntityType="dbmediaModel.Store.tbRole" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tbUser" EntityType="dbmediaModel.Store.tbUser" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_tbEqConnectRecord_tbEqInfo" Association="dbmediaModel.Store.FK_tbEqConnectRecord_tbEqInfo">
+            <End Role="tbEqInfo" EntitySet="tbEqInfo" />
+            <End Role="tbEqConnectRecord" EntitySet="tbEqConnectRecord" />
+          </AssociationSet>
           <AssociationSet Name="FK_tbEqInfo_tbCity" Association="dbmediaModel.Store.FK_tbEqInfo_tbCity">
             <End Role="tbCity" EntitySet="tbCity" />
+            <End Role="tbEqInfo" EntitySet="tbEqInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEqInfo_tbCommon" Association="dbmediaModel.Store.FK_tbEqInfo_tbCommon">
+            <End Role="tbCommon" EntitySet="tbCommon" />
             <End Role="tbEqInfo" EntitySet="tbEqInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_tbEqMediaInfo_tbEqInfo" Association="dbmediaModel.Store.FK_tbEqMediaInfo_tbEqInfo">
@@ -23,6 +33,10 @@
           <AssociationSet Name="FK_tbEqMediaInfo_tbMediaInfo" Association="dbmediaModel.Store.FK_tbEqMediaInfo_tbMediaInfo">
             <End Role="tbMediaInfo" EntitySet="tbMediaInfo" />
             <End Role="tbEqMediaInfo" EntitySet="tbEqMediaInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMediaInfo_tbCommon" Association="dbmediaModel.Store.FK_tbMediaInfo_tbCommon">
+            <End Role="tbCommon" EntitySet="tbCommon" />
+            <End Role="tbMediaInfo" EntitySet="tbMediaInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_tbUser_tbRole" Association="dbmediaModel.Store.FK_tbUser_tbRole">
             <End Role="tbRole" EntitySet="tbRole" />
@@ -36,6 +50,23 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CityName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="tbCommon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tag" Type="int" />
+        </EntityType>
+        <EntityType Name="tbEqConnectRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EqID" Type="int" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="tbEqInfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -43,6 +74,8 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="sn" Type="nvarchar" MaxLength="50" />
           <Property Name="CityID" Type="int" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="20" />
+          <Property Name="EqTypeID" Type="int" />
         </EntityType>
         <EntityType Name="tbEqMediaInfo">
           <Key>
@@ -64,6 +97,7 @@
           <Property Name="MediaSize" Type="bigint" />
           <Property Name="MediaType" Type="nvarchar" MaxLength="10" />
           <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="MediaCategoryID" Type="int" />
         </EntityType>
         <EntityType Name="tbRole">
           <Key>
@@ -82,7 +116,21 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="RoleID" Type="int" />
           <Property Name="RealName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_tbEqConnectRecord_tbEqInfo">
+          <End Role="tbEqInfo" Type="dbmediaModel.Store.tbEqInfo" Multiplicity="0..1" />
+          <End Role="tbEqConnectRecord" Type="dbmediaModel.Store.tbEqConnectRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEqInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqConnectRecord">
+              <PropertyRef Name="EqID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbEqInfo_tbCity">
           <End Role="tbCity" Type="dbmediaModel.Store.tbCity" Multiplicity="0..1" />
           <End Role="tbEqInfo" Type="dbmediaModel.Store.tbEqInfo" Multiplicity="*" />
@@ -92,6 +140,18 @@
             </Principal>
             <Dependent Role="tbEqInfo">
               <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEqInfo_tbCommon">
+          <End Role="tbCommon" Type="dbmediaModel.Store.tbCommon" Multiplicity="0..1" />
+          <End Role="tbEqInfo" Type="dbmediaModel.Store.tbEqInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCommon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqInfo">
+              <PropertyRef Name="EqTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -119,6 +179,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tbMediaInfo_tbCommon">
+          <End Role="tbCommon" Type="dbmediaModel.Store.tbCommon" Multiplicity="0..1" />
+          <End Role="tbMediaInfo" Type="dbmediaModel.Store.tbMediaInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCommon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbMediaInfo">
+              <PropertyRef Name="MediaCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbUser_tbRole">
           <End Role="tbRole" Type="dbmediaModel.Store.tbRole" Multiplicity="0..1" />
           <End Role="tbUser" Type="dbmediaModel.Store.tbUser" Multiplicity="*" />
@@ -138,6 +210,8 @@
       <Schema Namespace="dbmediaModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="dbmediaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbCity" EntityType="dbmediaModel.tbCity" />
+          <EntitySet Name="tbCommon" EntityType="dbmediaModel.tbCommon" />
+          <EntitySet Name="tbEqConnectRecord" EntityType="dbmediaModel.tbEqConnectRecord" />
           <EntitySet Name="tbEqInfo" EntityType="dbmediaModel.tbEqInfo" />
           <EntitySet Name="tbEqMediaInfo" EntityType="dbmediaModel.tbEqMediaInfo" />
           <EntitySet Name="tbMediaInfo" EntityType="dbmediaModel.tbMediaInfo" />
@@ -146,6 +220,18 @@
           <AssociationSet Name="FK_tbEqInfo_tbCity" Association="dbmediaModel.FK_tbEqInfo_tbCity">
             <End Role="tbCity" EntitySet="tbCity" />
             <End Role="tbEqInfo" EntitySet="tbEqInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEqInfo_tbCommon" Association="dbmediaModel.FK_tbEqInfo_tbCommon">
+            <End Role="tbCommon" EntitySet="tbCommon" />
+            <End Role="tbEqInfo" EntitySet="tbEqInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbMediaInfo_tbCommon" Association="dbmediaModel.FK_tbMediaInfo_tbCommon">
+            <End Role="tbCommon" EntitySet="tbCommon" />
+            <End Role="tbMediaInfo" EntitySet="tbMediaInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEqConnectRecord_tbEqInfo" Association="dbmediaModel.FK_tbEqConnectRecord_tbEqInfo">
+            <End Role="tbEqInfo" EntitySet="tbEqInfo" />
+            <End Role="tbEqConnectRecord" EntitySet="tbEqConnectRecord" />
           </AssociationSet>
           <AssociationSet Name="FK_tbEqMediaInfo_tbEqInfo" Association="dbmediaModel.FK_tbEqMediaInfo_tbEqInfo">
             <End Role="tbEqInfo" EntitySet="tbEqInfo" />
@@ -168,6 +254,26 @@
           <Property Name="CityName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="tbEqInfo" Relationship="dbmediaModel.FK_tbEqInfo_tbCity" FromRole="tbCity" ToRole="tbEqInfo" />
         </EntityType>
+        <EntityType Name="tbCommon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Tag" Type="Int32" />
+          <NavigationProperty Name="tbEqInfo" Relationship="dbmediaModel.FK_tbEqInfo_tbCommon" FromRole="tbCommon" ToRole="tbEqInfo" />
+          <NavigationProperty Name="tbMediaInfo" Relationship="dbmediaModel.FK_tbMediaInfo_tbCommon" FromRole="tbCommon" ToRole="tbMediaInfo" />
+        </EntityType>
+        <EntityType Name="tbEqConnectRecord">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EqID" Type="Int32" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="tbEqInfo" Relationship="dbmediaModel.FK_tbEqConnectRecord_tbEqInfo" FromRole="tbEqConnectRecord" ToRole="tbEqInfo" />
+        </EntityType>
         <EntityType Name="tbEqInfo">
           <Key>
             <PropertyRef Name="ID" />
@@ -175,7 +281,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sn" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="CityID" Type="Int32" />
+          <Property Name="IPAddress" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="EqTypeID" Type="Int32" />
           <NavigationProperty Name="tbCity" Relationship="dbmediaModel.FK_tbEqInfo_tbCity" FromRole="tbEqInfo" ToRole="tbCity" />
+          <NavigationProperty Name="tbCommon" Relationship="dbmediaModel.FK_tbEqInfo_tbCommon" FromRole="tbEqInfo" ToRole="tbCommon" />
+          <NavigationProperty Name="tbEqConnectRecord" Relationship="dbmediaModel.FK_tbEqConnectRecord_tbEqInfo" FromRole="tbEqInfo" ToRole="tbEqConnectRecord" />
           <NavigationProperty Name="tbEqMediaInfo" Relationship="dbmediaModel.FK_tbEqMediaInfo_tbEqInfo" FromRole="tbEqInfo" ToRole="tbEqMediaInfo" />
         </EntityType>
         <EntityType Name="tbEqMediaInfo">
@@ -200,6 +310,8 @@
           <Property Name="MediaSize" Type="Int64" />
           <Property Name="MediaType" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="MediaCategoryID" Type="Int32" />
+          <NavigationProperty Name="tbCommon" Relationship="dbmediaModel.FK_tbMediaInfo_tbCommon" FromRole="tbMediaInfo" ToRole="tbCommon" />
           <NavigationProperty Name="tbEqMediaInfo" Relationship="dbmediaModel.FK_tbEqMediaInfo_tbMediaInfo" FromRole="tbMediaInfo" ToRole="tbEqMediaInfo" />
         </EntityType>
         <EntityType Name="tbRole">
@@ -220,6 +332,8 @@
           <Property Name="Password" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="RoleID" Type="Int32" />
           <Property Name="RealName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="tbRole" Relationship="dbmediaModel.FK_tbUser_tbRole" FromRole="tbUser" ToRole="tbRole" />
         </EntityType>
         <Association Name="FK_tbEqInfo_tbCity">
@@ -231,6 +345,42 @@
             </Principal>
             <Dependent Role="tbEqInfo">
               <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEqInfo_tbCommon">
+          <End Role="tbCommon" Type="dbmediaModel.tbCommon" Multiplicity="0..1" />
+          <End Role="tbEqInfo" Type="dbmediaModel.tbEqInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCommon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqInfo">
+              <PropertyRef Name="EqTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbMediaInfo_tbCommon">
+          <End Role="tbCommon" Type="dbmediaModel.tbCommon" Multiplicity="0..1" />
+          <End Role="tbMediaInfo" Type="dbmediaModel.tbMediaInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbCommon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbMediaInfo">
+              <PropertyRef Name="MediaCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEqConnectRecord_tbEqInfo">
+          <End Role="tbEqInfo" Type="dbmediaModel.tbEqInfo" Multiplicity="0..1" />
+          <End Role="tbEqConnectRecord" Type="dbmediaModel.tbEqConnectRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEqInfo">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tbEqConnectRecord">
+              <PropertyRef Name="EqID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -284,12 +434,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tbCommon">
+            <EntityTypeMapping TypeName="dbmediaModel.tbCommon">
+              <MappingFragment StoreEntitySet="tbCommon">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEqConnectRecord">
+            <EntityTypeMapping TypeName="dbmediaModel.tbEqConnectRecord">
+              <MappingFragment StoreEntitySet="tbEqConnectRecord">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EqID" ColumnName="EqID" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tbEqInfo">
             <EntityTypeMapping TypeName="dbmediaModel.tbEqInfo">
               <MappingFragment StoreEntitySet="tbEqInfo">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="sn" ColumnName="sn" />
                 <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="EqTypeID" ColumnName="EqTypeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -313,6 +484,7 @@
                 <ScalarProperty Name="MediaSize" ColumnName="MediaSize" />
                 <ScalarProperty Name="MediaType" ColumnName="MediaType" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="MediaCategoryID" ColumnName="MediaCategoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -333,6 +505,8 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="RealName" ColumnName="RealName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -19,6 +19,8 @@ namespace AUSUMediaSite.EF
         public string Password { get; set; }
         public Nullable<int> RoleID { get; set; }
         public string RealName { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
     
         public virtual tbRole tbRole { get; set; }
     }

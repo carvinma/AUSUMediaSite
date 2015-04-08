@@ -4,14 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2afbf898131345798c813a7bbaaa7b08" Name="关系图1">
-        <EntityTypeShape EntityType="dbmediaModel.tbCity" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbmediaModel.tbEqInfo" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbmediaModel.tbEqMediaInfo" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbmediaModel.tbMediaInfo" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbmediaModel.tbRole" Width="1.5" PointX="5.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbmediaModel.tbUser" Width="1.5" PointX="8" PointY="4.875" IsExpanded="true" />
+      <Diagram DiagramId="6f3187b1692d4fc4956d7fe083afbee2" Name="关系图1">
+        <EntityTypeShape EntityType="dbmediaModel.tbCity" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbCommon" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbEqConnectRecord" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbEqInfo" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbEqMediaInfo" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbMediaInfo" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbRole" Width="1.5" PointX="7.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbmediaModel.tbUser" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="dbmediaModel.FK_tbEqInfo_tbCity" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmediaModel.FK_tbEqInfo_tbCommon" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmediaModel.FK_tbMediaInfo_tbCommon" ManuallyRouted="false" />
+        <AssociationConnector Association="dbmediaModel.FK_tbEqConnectRecord_tbEqInfo" ManuallyRouted="false" />
         <AssociationConnector Association="dbmediaModel.FK_tbEqMediaInfo_tbEqInfo" ManuallyRouted="false" />
         <AssociationConnector Association="dbmediaModel.FK_tbEqMediaInfo_tbMediaInfo" ManuallyRouted="false" />
         <AssociationConnector Association="dbmediaModel.FK_tbUser_tbRole" ManuallyRouted="false" />
