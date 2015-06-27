@@ -20,8 +20,13 @@
             })
             $('body').addClass('theme-' + color);
         }
-
-        $('[data-popover="true"]').popover({ html: true });
+        try
+        {
+            $('[data-popover="true"]').popover({ html: true });
+        }
+        catch (e)
+        {
+        }
 
     });
 </script>
@@ -67,7 +72,7 @@
 
 <div class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
-        <a class="" href="index.html"><span class="navbar-brand">AUSU</span></a>
+        <a class="" href="index.html"><span class="navbar-brand">ASUS</span></a>
     </div>
 
     <div class="navbar-collapse collapse" style="height: 1px;">

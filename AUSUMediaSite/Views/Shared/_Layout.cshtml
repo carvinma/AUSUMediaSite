@@ -36,8 +36,12 @@
                 })
                 $('body').addClass('theme-' + color);
             }
-
-            $('[data-popover="true"]').popover({ html: true });
+            try
+            {
+                $('[data-popover="true"]').popover({ html: true });
+            }
+            catch (e)
+            { }
 
         });
     </script>
@@ -87,7 +91,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="" href="index.html"><span class="navbar-brand">AUSU</span></a>
+            <a class="" href="index.html"><span class="navbar-brand">ASUS</span></a>
         </div>
 
         <div class="navbar-collapse collapse" style="height: 1px;">
