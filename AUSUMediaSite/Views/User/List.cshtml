@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "用户列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int seqNumber = ViewBag.SeqNumber;
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<AUSUMediaSite.EF.tbUser>
+
+<div class="row">
+     <div class="btn-toolbar list-toolbar">
+            <a href="/user/create" class="btn btn-primary"><i class="fa fa-plus"></i>新增</a>            
+        </div>
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">用户列表</div>
+        <table class="table table-bordered">
+            <tr>
+                <th>#
+                </th>
+                <th>用户名
+                </th>
+                <th>真实姓名
+                </th>
+                  <th>邮箱
+                </th>
+                  <th>电话
+                </th>
+               
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @seqNumber
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.RealName)
+                    </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                   
+                </tr>
+                seqNumber++;
+            }
+
+        </table>
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+</div>
+

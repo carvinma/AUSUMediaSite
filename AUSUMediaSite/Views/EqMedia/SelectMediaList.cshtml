@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "视频列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int seqNumber = ViewBag.SeqNumber;
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<AUSUMediaSite.EF.tbMediaInfo>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#checkAll").click(function () {
+            var checked_status = this.checked;
+            $("input[name='box']").each(function () {
+                if (checked_status) {
+                    $(this).prop("checked", true);
+                }
+                else {
+                    $(this).removeAttr('checked');
+                }
+            });
+            
+        });
+        $(".btn-primary").click(function () {
+            var subIds = '';
+            $("[type='checkbox'][name='box']:checked").each(function () {
+                subIds += $(this).val() + ",";
+            });
+            
+            
+            var eqIds=$("#eqIds").val();
+            var url = "/EqMedia/AddBatch";
+            $.ajax({
+                type: 'POST',
+                contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                url: url,
+                data: { EqIds:eqIds, MediaIds: subIds},
+                dataType: "Json",
+                //成功后  
+                success: function (msg) {
+                    window.location.href = "/EqMedia/EqOnlineMediaList";
+                },
+                //完成后  
+                complete: function () {
+                    //$("[name = 'checkbox']").attr('checked', false);//取消选择  
+                    //location.reload();//刷新  
+
+                    window.location.href = "/EqMedia/EqOnlineMediaList";
+                }
+            });
+
+
+        });
+    });
+</script>
+
+
+<div class="row">
+     <input type="hidden" id="eqIds" name="eqIds" value="@ViewBag.EqIds" />
+        <div class="btn-toolbar list-toolbar">
+            <a href="#" class="btn btn-primary"><i class="fa fa-plus">确认分配</i></a>            
+        </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">选择视频列表</div>
+
+<table class="table table-bordered">
+    <tr>
+         <th>
+                    <input type="checkbox" id="checkAll" >
+                </th>
+        <th>
+            #
+        </th>
+        @*<th>
+            视频名称
+        </th>*@
+         <th>
+            视频文件
+        </th>
+        <th>
+            字幕
+        </th>
+         @*<th>
+            文件大小
+        </th>*@
+        <th>
+           类别
+        </th>
+        <th>更新时间</th>
+    </tr>
+
+ @foreach (var item in Model) {
+    <tr>
+         <td>
+                        <input type="checkbox" value="@item.ID" name="box">
+                    </td>
+        <td>
+            @seqNumber
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.MediaName)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.MediaUrl)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubTitle)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.MediaSize)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.MediaType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateTime)
+        </td>
+       
+       
+    </tr>
+    
+seqNumber++;
+            }
+
+        </table>       
+    </div>
+
+@Html.PagedListPager( Model, page => Url.Action("MediaList", new {page,EqIds=ViewBag.EqIds}) )
+   
+</div>
+

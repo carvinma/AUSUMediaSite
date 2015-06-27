@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "视频列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int seqNumber = ViewBag.SeqNumber;
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<AUSUMediaSite.EF.tbMediaInfo>
+
+<div class="row">
+
+    <div class="btn-toolbar list-toolbar">
+        <a href="/Media/MediaCreate" class="btn btn-primary"><i class="fa fa-plus"></i>新增</a>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">视频列表</div>
+
+        <table class="table table-bordered">
+            <tr>
+                <th>#
+                </th>
+                <th>视频文件
+                </th>
+                <th>字幕
+                </th>
+                @*         <th>
+            文件大小
+        </th>*@
+                <th>类别
+                </th>
+                <th>更新时间</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @seqNumber
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MediaUrl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubTitle)
+                    </td>
+                    @*        <td>
+            @Html.DisplayFor(modelItem => item.MediaSize)
+        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MediaType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UpdateTime)
+                    </td>
+
+                    <td>
+                        <a href="/Media/MediaEdit/@item.ID"><i class="fa fa-pencil"></i></a>
+                        <a href="#myModal"  class="jq_link" rel="@item.ID" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+                        @*<a href="javascript:void(0);" ><i class="fa fa-trash-o"></i></a>*@
+                    </td>
+                </tr>
+    
+                seqNumber++;
+            }
+
+        </table>
+    </div>
+
+    @Html.PagedListPager(Model, page => Url.Action("MediaList", new { page }))
+</div>
+<div class="modal small fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Delete Confirmation</h3>
+            </div>
+            <div class="modal-body">
+                <p class="error-text">
+                    <i class="fa fa-warning modal-icon"></i>Are you sure you want to delete the user?<br>
+                    This cannot be undone.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button id="btnDel" class="btn btn-danger" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $(".jq_link").click(function ()
+        {
+            $("#Modal").modal();
+            var id = $(this).attr('rel');
+            $("#btnDel").click(function ()
+            {
+                window.document.location = "MediaDel/" + id;
+            });
+
+        });
+    });
+</script>

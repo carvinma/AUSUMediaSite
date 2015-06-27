@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "设备类别列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model AUSUMediaSite.EF.tbCommon
+
+@{
+    ViewBag.Title = "编辑设备类别";
+}
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">编辑设备类别</div>
+
+        <div class="row">
+            <form id="frm" method="post" class="form-horizontal" action="~/common/EqTypeEdit">
+                <input type="hidden" id="id" name="id" value="@Model.ID" />
+                <div class="form-group">
+                    <label class="col-lg-4 control-label"><span class="input_required"></span>类别名称：</label>
+                    <div class="col-lg-4">
+                        <input type="text"  class="form-control" name="Name" id="Name" value="@Model.Name" />
+                    </div>
+                </div>
+
+             
+                <div class="form-group">
+                    <label class="col-lg-4 control-label"></label>
+                    <div class="col-lg-4">
+                        <button type="submit" id="submit1" class="btn btn-primary">保存</button>
+                        <a id="btnBack" href="~/Common/EqTypeList" class="btn btn-md btn-warning">取消</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

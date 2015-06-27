@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "设备类别列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int seqNumber = ViewBag.SeqNumber;
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<AUSUMediaSite.EF.tbCommon>
+
+<div class="row">
+     <div class="btn-toolbar list-toolbar">
+            <a href="/common/eqtypecreate" class="btn btn-primary"><i class="fa fa-plus"></i>新增</a>            
+        </div>
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">设备类别列表</div>
+        <table class="table table-bordered">
+            <tr>
+                <th>#
+                </th>
+                <th>设备类别
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @seqNumber
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+
+                    <td>
+                        <a href="/Common/EqTypeEdit/@item.ID"><i class="fa fa-pencil"></i></a>
+                    </td>
+                </tr>
+                seqNumber++;
+            }
+
+        </table>
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("EqTypeList", new { page }))
+</div>
+

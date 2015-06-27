@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "设备视频管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int seqNumber = ViewBag.SeqNumber;
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<AUSUMediaSite.EF.tbEqInfo>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#checkAll").click(function () {
+            var checked_status = this.checked;
+            $("input[name='box']").each(function () {
+                if (checked_status) {
+                    $(this).prop("checked", true);
+                }
+                else {
+                    $(this).removeAttr('checked');
+                }
+            });
+            
+        });
+        $(".btn-primary").click(function () {
+            var subIds = '';
+            $("[type='checkbox'][name='box']:checked").each(function () {
+                subIds += $(this).val() + ",";
+            });
+            //alert(subIds);  
+            var url = "/EqMedia/SelectMediaList?EqIds=" + subIds;
+            window.location.href = url;
+
+        });
+    });
+</script>
+
+
+
+<div class="row">
+    <div class="btn-toolbar list-toolbar">
+        <a href="#" class="btn btn-primary"><i class="fa fa-plus"></i>分配视频</a>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">请选择设备</div>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    <input type="checkbox" id="checkAll">
+                </th>
+                <th>#
+                </th>
+                <th>设备SN
+                </th>
+                @*<th>IP地址
+                </th>*@
+                <th>设备类别
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" value="@item.ID"name="box" >
+                    </td>
+                    <td>
+                        @seqNumber
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sn)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.IPAddress)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tbCommon.Name)
+                    </td>
+                    <td><a href="/EqMedia/EqOnlineMediaList/@item.ID"><i class="fa fa-pencil"></i></a></td>
+                </tr>
+                seqNumber++;
+            }
+
+        </table>
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("AssignMediaList", new { page }))
+</div>
+

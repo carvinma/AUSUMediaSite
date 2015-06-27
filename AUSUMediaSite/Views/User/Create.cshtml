@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "用户列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model AUSUMediaSite.EF.tbUser
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">编辑个人信息</div>
+
+        <div class="row">
+            <form id="frm" method="post" class="form-horizontal" action="~/User/Create">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label"><span class="input_required"></span>用户名：</label>
+                    <div class="col-lg-4">
+                        <input type="text"  class="form-control" name="UserName" id="UserName"  />
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-lg-4 control-label"><span class="input_required"></span>真实姓名：</label>
+                    <div class="col-lg-4">
+                        <input type="text"  class="form-control" name="RealName" id="RealName"  />
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-lg-4 control-label"><span class="input_required"></span>邮箱：</label>
+                    <div class="col-lg-4">
+                        <input type="text"  class="form-control" name="Email" id="Email"  />
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-lg-4 control-label"><span class="input_required"></span>电话：</label>
+                    <div class="col-lg-4">
+                        <input type="text"  class="form-control" name="Phone" id="Phone"  />
+                    </div>
+                </div>
+             
+                <div class="form-group">
+                    <label class="col-lg-4 control-label"></label>
+                    <div class="col-lg-4">
+                        <button type="submit" id="submit1" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

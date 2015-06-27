@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "VideoEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model AUSUMediaSite.EF.tbMediaInfo
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $.ajax({
+            url: '/common/GetCommons?tag=1',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data)
+            {
+                $.each(data.Data, function (key, d)
+                {
+                    var s = '<option value="' + d.Value + '">' + d.Display + '</option>'
+                    $('#MediaCategoryID').append(s);
+
+                });
+            }
+        });
+
+        $.ajax({
+            url: '/EqMedia/GetMp4List',
+            dataType: 'json',
+            contentType: 'application/json',
+            type:"POST",
+            success: function (data)
+            {
+                $("#MediaUrl").append("<option value=''></option>");
+                for (var i = 0; i < data.length; i++)
+                {
+                    $("#MediaUrl").append("<option value='" + data[i] + "'>" + data[i] + "</option>");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+            }
+        });
+        $("#MediaCategoryID").change(function ()
+        {
+            $("#MediaType").val($(this).find("option:selected").text());
+        });
+    });
+</script>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading no-collapse">新增视频</div>
+
+        <form id="frm" method="post" class="form-horizontal" action="~/Media/MediaCreate">
+            <input id="MediaType" name="MediaType" type="hidden" />
+            @*<div class="form-group">
+                <label class="col-lg-4 control-label"><span class="input_required"></span>视频名称：</label>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control" name="MediaName" id="MediaName">
+                </div>
+
+            </div>*@
+            <div class="form-group">
+                <label class="col-lg-4 control-label"><span class="input_required"></span>视频文件：</label>
+                <div class="col-lg-4">
+                    <select name="MediaUrl" id="MediaUrl" class="form-control">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label"><span class="input_required"></span>视频字幕：</label>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control" name="SubTitle" id="SubTitle">
+                </div>
+            </div>
+            @*<div class="form-group">
+                <label class="col-lg-4 control-label"><span class="input_required"></span>视频大小：</label>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control" name="MediaSize" id="MediaSize">
+                </div>
+            </div>*@
+            <div class="form-group">
+                <label class="col-lg-4 control-label"><span class="input_required"></span>视频类别：</label>
+                <div class="col-lg-4">
+                    <select name="MediaCategoryID" id="MediaCategoryID" class="form-control">
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-4 control-label"></label>
+                <div class="col-lg-4">
+                    <button type="submit" id="submit1" class="btn btn-primary">保存</button>
+                    <a id="btnBack" href="~/Media/MediaList" class="btn btn-md btn-warning">取消</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
