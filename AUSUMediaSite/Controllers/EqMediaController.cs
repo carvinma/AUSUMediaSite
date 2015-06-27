@@ -18,38 +18,51 @@ namespace AUSUMediaSite.Controllers
         private dbmediaEntities db = new dbmediaEntities();
 
         //分配给设备播放视频
-        public ActionResult AssignMediaList(int? page)
+        public ActionResult AssignMediaList(string EqTypeID, int? page)
         {
             var query = from s in db.tbEqInfo
                         select s;
             if (page == null)
                 page = 1;
 
+            if (!string.IsNullOrEmpty(EqTypeID) && int.Parse(EqTypeID) > 0)
+            {
+                ViewBag.CurrentEqTypeID = EqTypeID;
+                int v = int.Parse(EqTypeID);
+                query = query.Where(s => s.EqTypeID == v);
+            }
+
             query = query.OrderByDescending(s => s.sn);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
             ViewBag.SeqNumber = (pageNumber - 1) * pageSize + 1;
+            ViewBag.EqTypeID = GetAllEqType();
             return View(query.ToPagedList(pageNumber, pageSize));
         }
 
 
-        public ActionResult SelectMediaList(string EqIds, int? page)
+        public ActionResult SelectMediaList(string MediaCategoryID, string EqIds, int? page)
         {
             var query = from s in db.tbMediaInfo
                         select s;
             if (page == null)
                 page = 1;
-
+            if (!string.IsNullOrEmpty(MediaCategoryID) && int.Parse(MediaCategoryID) > 0)
+            {
+                ViewBag.CurrentMediaCategoryID = MediaCategoryID;
+                int v = int.Parse(MediaCategoryID);
+                query = query.Where(s => s.MediaCategoryID == v);
+            }
             query = query.OrderByDescending(s => s.ID);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
 
             ViewBag.SeqNumber = (pageNumber - 1) * pageSize + 1;
+            ViewBag.MediaCategoryID = GetAllMediaCategory();
             ViewBag.EqIds = EqIds;
             return View(query.ToPagedList(pageNumber, pageSize));
         }
-
 
 
         //某一个设备的播放视频列表
@@ -72,6 +85,7 @@ namespace AUSUMediaSite.Controllers
 
             ViewBag.id = id;
             ViewBag.SeqNumber = (pageNumber - 1) * pageSize + 1;
+            ViewBag.EqTypeID = GetAllEqType();
             return View(query.ToPagedList(pageNumber, pageSize));
         }
 
@@ -153,6 +167,47 @@ namespace AUSUMediaSite.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public List<SelectListItem> GetAllMediaCategory()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            var query2 = from s in db.tbCommon
+                         where s.Tag == 1
+                         select s;
+            SelectListItem item = new SelectListItem();
+            item.Value = "0";
+            item.Text = "所有";
+            items.Add(item);
+            foreach (tbCommon s in query2.ToList())
+            {
+                item = new SelectListItem();
+                item.Value = s.ID.ToString();
+                item.Text = s.Name;
+                items.Add(item);
+            }
+            return items;
+        }
+
+
+        public List<SelectListItem> GetAllEqType()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            var query2 = from s in db.tbCommon
+                         where s.Tag == 2
+                         select s;
+            SelectListItem item = new SelectListItem();
+            item.Value = "0";
+            item.Text = "所有";
+            items.Add(item);
+            foreach (tbCommon s in query2.ToList())
+            {
+                item = new SelectListItem();
+                item.Value = s.ID.ToString();
+                item.Text = s.Name;
+                items.Add(item);
+            }
+            return items;
         }
     }
 }

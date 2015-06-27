@@ -60,8 +60,18 @@
 <div class="row">
      <input type="hidden" id="eqIds" name="eqIds" value="@ViewBag.EqIds" />
         <div class="btn-toolbar list-toolbar">
-            <a href="#" class="btn btn-primary"><i class="fa fa-plus">确认分配</i></a>            
+            <a href="#" class="btn btn-primary"><i class="fa fa-plus">确认分配</i></a>           
         </div>
+    <div class="col-sm-offset-1">
+
+        @using (Html.BeginForm("SelectMediaList", "EqMedia", FormMethod.Get))
+        {
+            <p>
+                视频类型: @Html.DropDownList("MediaCategoryID")
+                <input type="submit" value="查询" class="btn btn-md  btn-info" />
+            </p>
+        }
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading no-collapse">选择视频列表</div>
@@ -128,7 +138,7 @@ seqNumber++;
         </table>       
     </div>
 
-@Html.PagedListPager( Model, page => Url.Action("MediaList", new {page,EqIds=ViewBag.EqIds}) )
+@Html.PagedListPager( Model, page => Url.Action("MediaList", new {MediaCategoryID=ViewBag.CurrentMediaCategoryID,page,EqIds=ViewBag.EqIds}) )
    
 </div>
 

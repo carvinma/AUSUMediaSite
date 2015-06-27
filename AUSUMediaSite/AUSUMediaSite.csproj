@@ -43,11 +43,12 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PagedList">
-      <HintPath>C:\Users\Administrator\Documents\Visual Studio 2012\Projects\Qisr\Qisr\bin\PagedList.dll</HintPath>
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="PagedList.Mvc">
-      <HintPath>C:\Users\Administrator\Documents\Visual Studio 2012\Projects\Qisr\Qisr\bin\PagedList.Mvc.dll</HintPath>
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -511,6 +512,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\User\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Fakes Include="Fakes\PagedList.fakes" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
